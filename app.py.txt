@@ -1,0 +1,28 @@
+import streamlit as st
+import pandas as pd
+
+# Title of the web app
+st.title("Simple Data Upload and Display Website")
+
+# File uploader widget
+uploaded_file = st.file_uploader("Upload your CSV file", type="csv")
+
+# When a file is uploaded
+if uploaded_file is not None:
+    # Read the CSV file using pandas
+    data = pd.read_csv(uploaded_file)
+
+    # Display the dataframe
+    st.subheader("Uploaded Data Preview")
+    st.dataframe(data)
+
+    # Basic data info
+    st.subheader("Basic Data Information")
+    st.write(f"Number of rows: {data.shape[0]}")
+    st.write(f"Number of columns: {data.shape[1]}")
+
+    # Display summary statistics
+    st.subheader("Summary Statistics")
+    st.write(data.describe())
+else:
+    st.info("Please upload a CSV file to see data preview and summary.")
